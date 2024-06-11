@@ -5,7 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/method")
 @PreAuthorize("denyAll()")
 public class TestAuthController {
 
@@ -16,13 +16,13 @@ public class TestAuthController {
     }
 
     @PostMapping("/post")
-    @PreAuthorize("hasAuthority('CREATE') or hasAuthority('UPDATE')")
+    @PreAuthorize("hasAnyAuthority('CREATE','UPDATE')")
     public ResponseEntity<String> post() {
         return ResponseEntity.ok("Hello World POST");
     }
 
     @PutMapping("/put")
-    @PreAuthorize("hasAnyAutority('CREATE', 'UPDATE', 'REFACTOR')")
+    @PreAuthorize("hasAnyAuthority('CREATE', 'UPDATE', 'REFACTOR')")
     public ResponseEntity<String> put() {
         return ResponseEntity.ok("Hello World con PUT");
     }
